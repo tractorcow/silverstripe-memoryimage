@@ -10,7 +10,7 @@ Images will not be deleted when doing a FilesystemSyncTask.
 
 ## Credits and Authors
 
- * Damian Mooyman - <https://github.com/tractorcow/silverstripe-lessphp>
+ * Damian Mooyman - <https://github.com/tractorcow/silverstripe-memoryimage>
 
 ## Requirements
 
