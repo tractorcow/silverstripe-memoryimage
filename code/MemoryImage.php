@@ -312,6 +312,11 @@ class MemoryImage extends Image
 
         return "data:image/$format;base64,$data";
     }
+    
+    function getAbsoluteURL()
+    {
+        return $this->getURL();
+    }
 
     /**
      * Return an XHTML img tag for this Image,
@@ -343,6 +348,30 @@ class MemoryImage extends Image
     public function updateFilesystem()
     {
         // Since there's no longer a filesystem we should no longer do this dance
+    }
+
+    /**
+     * Get the dimensions of this Image.
+     * @param string $dim If this is equal to "string", return the dimensions in string form,
+     * if it is 0 return the height, if it is 1 return the width.
+     * @return string|int
+     */
+    function getDimensions($dim = "string")
+    {
+        $gd = new MemoryGD($this->ImageData, $this->determineFormat());
+        if (!$gd->hasGD())
+            return ($dim === "string")
+                    ? "MemoryImage not initialised"
+                    : null;
+
+        if($dim === "string")
+            return sprintf("%sx%s", $gd->getWidth(), $gd->getHeight());
+        
+        if($dim == 0)
+            return $gd->getWidth();
+        
+        if($dim == 1)
+            return $gd->getHeight();
     }
 
 }
